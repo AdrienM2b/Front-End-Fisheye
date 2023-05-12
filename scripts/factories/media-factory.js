@@ -1,5 +1,5 @@
 function mediaFactory(dataMedia){
-    const {likes, title, image, video, photographerId, price} = dataMedia;
+    const {likes, title, image, video, photographerId, price, date} = dataMedia;
     // cette fonction c'est juste un pattern pour creer
     // une image avec les likes et le titre
     const picture = `assets/photographers/Sample_Photos/${photographerId}/${image}`
