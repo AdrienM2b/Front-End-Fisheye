@@ -36,7 +36,7 @@ async function displayMedia(photo){
     })
 }
 
-async function containerLikePrice({foundPhotographer, photo}){
+async function containerLikePrice(foundPhotographer){
     //affichage du Prix et nbr de like du photographe
     const boxPrice = document.createElement('div');
     boxPrice.classList.add('boxPrice-photographer')
@@ -47,12 +47,7 @@ async function containerLikePrice({foundPhotographer, photo}){
     // nombre de likes
     const likeContainer = document.createElement('p');
     likeContainer.classList.add('photographer-likes');
-    // calcul du nombre total de likes
-     var totalLikes = 0
-    photo.forEach((like) => {
-        totalLikes += like.likes
-    })
-    likeContainer.textContent = totalLikes;
+    
 
     // ajout de l'icone
     const icone = document.createElement('i')
@@ -62,35 +57,41 @@ async function containerLikePrice({foundPhotographer, photo}){
     boxPrice.appendChild(likeContainer)
     boxPrice.appendChild(photographPrice)
     main.appendChild(boxPrice)
+}
 
-    // Ecouter les boutons et les transformer d'une nodeList a un tableau 
-    const selectionButton = document.querySelectorAll('.like-button')
-    const buttonisNotLiked = Array.from(selectionButton)
-    //  Aller chercher les elemnts contenant le nbr de likes et les transformer d'une nodeList a un tableau
-    const LikesImg = document.querySelectorAll('.nbr_of_likes')
-    const nbrlike = Array.from(LikesImg)
-    // mapper le tableau pour n'afficher que les chiffres des elements avec parseInt()
-    let nbrLikesImg = nbrlike.map(element => parseInt(element.textContent))
+async function likes(photo){
+    const totalLikesContainer = document.querySelector('.photographer-likes')
+    const photographerContainer = document.querySelector('.boxPrice-photographer')
 
+    // calcul du nombre total de likes
+    var totalLikes = 0
+    photo.forEach((like) => {
+        totalLikes += like.likes
+    })
+    totalLikesContainer.textContent = totalLikes;
 
-    // ajouter une boucle pour permettre de faire un like au clic et retrait d'un like au reclic
-    buttonisNotLiked.forEach( (buttons, i) => {
-        buttons.addEventListener('click', function(){            
-            if(this.classList.contains('--liked')){
-                this.classList.remove('--liked')
-                nbrLikesImg[i]--
-                totalLikes--
-                likeContainer.innerHTML = totalLikes
-                nbrlike[i].innerHTML = nbrLikesImg[i]
-            }else{
-                this.classList.toggle('--liked')
-                nbrLikesImg[i]++
-                totalLikes++
-                likeContainer.innerHTML = totalLikes
-                nbrlike[i].innerHTML = nbrLikesImg[i]                
-            }
-        })
-    });
+    photographerContainer.appendChild(totalLikesContainer)
+    // incrementation du like
+    const getLikes = document.getElementsByClassName('nbr_of_likes')
+    const allLikes = Array.from(getLikes)
+
+    allLikes.forEach((like, i) => {
+        let nbrLikesImg = parseInt(like.textContent);
+        let photoLikes = photo[i].likes;
+      
+        like.addEventListener('click', function() {
+          if (nbrLikesImg === photoLikes) {
+            nbrLikesImg++;
+            totalLikes++;
+          } else {
+            nbrLikesImg--;
+            totalLikes--;
+          }
+      
+          like.innerHTML = nbrLikesImg;
+          totalLikesContainer.innerHTML = totalLikes;
+        });
+      });
 }
 
 async function setSortButton(photo){
@@ -156,19 +157,18 @@ async function setSortButton(photo){
         switch (selectedValue) {
             case 'Popularité':
             sortByPopularity(photo)
-            lightBox()
             break
             case 'Date':
             sortByDate(photo)
-            lightBox()
             break
             case 'Titre':
             sortByTitle(photo)
-            lightBox()
             break
             default:
-            console.log('Option non valide')
+            displayMedia(photo)
         }
+        lightBox()
+        likes(photo)
     })
 
 }
@@ -273,18 +273,17 @@ async function lightBox(){
     })
 }
 
-
 async function initPhotographer(){
     const { photographers, media } = await getData();
     // trouver le nom du photographe pour les images
     const foundPhotographer = photographers.find(element => element.id == photographerId);
     // filtrer les image du photographe
     const photo = media.filter(m => m.photographerId === parseInt(photographerId));
-    lightBox();
     setSortButton(photo)
     headerPhotographer(foundPhotographer);
     displayMedia(photo);
-    containerLikePrice({foundPhotographer, photo});
+    containerLikePrice(foundPhotographer);
+    lightBox();
+    likes(photo);
 }
 initPhotographer();
-
