@@ -10,7 +10,7 @@ async function getData() {
     return data;
 }
 
-async function headerPhotographer(foundPhotographer){
+async function displayFactories(foundPhotographer, photo){
     // fabrication du header
     //selection Header
     const photographerHeader = document.querySelector('.photograph-header');
@@ -20,6 +20,11 @@ async function headerPhotographer(foundPhotographer){
     // créer le contenu du header
     photographerHeader.appendChild(userContentDOM);
     photographerHeader.appendChild(userHeaderDOM);
+
+    // affichage des boutons 
+    const factory = mediaFactory(photo)
+    const displayButtons = factory.buttonSort()
+    main.appendChild(displayButtons)
 }
 
 async function displayMedia(photo){
@@ -34,6 +39,7 @@ async function displayMedia(photo){
         gallery.appendChild(displayImg)
         main.appendChild(gallery)
     })
+    console.log(gallery)
 }
 
 async function containerLikePrice(foundPhotographer){
@@ -45,14 +51,19 @@ async function containerLikePrice(foundPhotographer){
     photographPrice.textContent = `${foundPhotographer.price} €/jour`
 
     // nombre de likes
-    const likeContainer = document.createElement('p');
-    likeContainer.classList.add('photographer-likes');
+    const likeContainer = document.createElement('div');
+    likeContainer.classList.add('total-likes_container');
     
+    const totalLikes = document.createElement('p');
+    totalLikes.classList.add('total-likes');
+    totalLikes.textContent = '0'
 
     // ajout de l'icone
     const icone = document.createElement('i')
     icone.classList.add('fa-solid', 'fa-heart')
+
     // ajouter tout ensemble
+    likeContainer.appendChild(totalLikes)
     likeContainer.appendChild(icone)
     boxPrice.appendChild(likeContainer)
     boxPrice.appendChild(photographPrice)
@@ -60,117 +71,89 @@ async function containerLikePrice(foundPhotographer){
 }
 
 async function likes(photo){
-    const totalLikesContainer = document.querySelector('.photographer-likes')
-    const photographerContainer = document.querySelector('.boxPrice-photographer')
-
+    const textLikes =  document.querySelector('.total-likes')
     // calcul du nombre total de likes
     var totalLikes = 0
+
     photo.forEach((like) => {
         totalLikes += like.likes
     })
-    totalLikesContainer.textContent = totalLikes;
-
-    photographerContainer.appendChild(totalLikesContainer)
+    textLikes.innerHTML = totalLikes
+  
     // incrementation du like
-    const getLikes = document.getElementsByClassName('nbr_of_likes')
-    const allLikes = Array.from(getLikes)
-
-    allLikes.forEach((like, i) => {
-        let nbrLikesImg = parseInt(like.textContent);
-        let photoLikes = photo[i].likes;
-      
-        like.addEventListener('click', function() {
-          if (nbrLikesImg === photoLikes) {
-            nbrLikesImg++;
-            totalLikes++;
-          } else {
-            nbrLikesImg--;
-            totalLikes--;
-          }
-      
-          like.innerHTML = nbrLikesImg;
-          totalLikesContainer.innerHTML = totalLikes;
+    const boutonLike = document.querySelectorAll('.like-button')
+    boutonLike.forEach((bouton, index) => {
+        bouton.addEventListener('click', () => {
+            changeLikes(index);
         });
-      });
-}
-
-async function setSortButton(photo){
-
-    // titre du tri 'trier par'
-    const listTitle = document.createElement('h4')
-    listTitle.textContent = 'Trier par'
-    listTitle.classList.add('sort-list__container')
-    // liste du menu deroulant
-    const listSort = document.createElement('select')
-    listSort.classList.add('sort-list')
-    const selectOne = document.createElement('option')
-    selectOne.textContent = 'Selectionner'
-    // ajout de l'élément de tri des photos par likes
-    const sortButtonByLikes = document.createElement('option')
-    sortButtonByLikes.text = 'Popularité'
-    sortButtonByLikes.classList.add('sort-button__by__likes')
-    // ajout de l'élément de tri des photos par date 
-    const sortButtonByDate = document.createElement('option')
-    sortButtonByDate.textContent = 'Date'
-    sortButtonByDate.classList.add('sort-button__by__date')
-    // ajout de l'élément de tri des photos par titre 
-    const sortButtonByTitle = document.createElement('option')
-    sortButtonByTitle.textContent = 'Titre'
-    sortButtonByTitle.classList.add('sort-button__by__title')
-
-    // ajouter dans le main
-    listSort.appendChild(selectOne)
-    listSort.appendChild(sortButtonByLikes)
-    listSort.appendChild(sortButtonByDate)
-    listSort.appendChild(sortButtonByTitle)
-    listTitle.appendChild(listSort)
-    main.appendChild(listTitle)
-    
-    function sortByPopularity(){
-        // il faut trier par popularité (likes), date et titre (ordre alphabetique)
-        photo.sort(function (a,b){return a.likes-b.likes})
-        displayMedia(photo)
-    }
-    
-    function sortByDate(){
-        // il faut trier par popularité (likes), date et titre (ordre alphabetique)
-        photo.sort((a, b) => new Date(b.date) - new Date(a.date))
-        displayMedia(photo)
-    }
-    
-    function sortByTitle(){
-        // il faut trier par popularité (likes), date et titre (ordre alphabetique)
-        function compareStrings(a, b) {       
-            return (a < b) ? -1 : (a > b) ? 1 : 0;
-        }
-        photo.sort(function(a, b) {
-            return compareStrings(a.title, b.title);
-          })
-        displayMedia(photo)
-    }
-
-    // ecouter les boutons
-    listSort.addEventListener('change', function (){
-        const selectedValue = listSort.value;
-        const gallery = document.querySelector('.gallery');
-        main.removeChild(gallery)
-        switch (selectedValue) {
-            case 'Popularité':
-            sortByPopularity(photo)
-            break
-            case 'Date':
-            sortByDate(photo)
-            break
-            case 'Titre':
-            sortByTitle(photo)
-            break
-            default:
-            displayMedia(photo)
-        }
-        lightBox()
-        likes(photo)
+        
+        bouton.addEventListener('keypress', function(event) {
+            console.log(key)
+            if (event.key === 'Enter') {
+            changeLikes(index);
+            }
+        })
     })
 
+    function changeLikes(index) {
+        let bouton = boutonLike[index]
+        let like = bouton.childNodes[0]
+        let nbrLikesImg = parseInt(like.textContent)
+        let photoLikes = photo[index].likes        
+        if(photoLikes === nbrLikesImg){
+            nbrLikesImg++
+            totalLikes++
+        }else{
+            nbrLikesImg--
+            totalLikes--
+        }
+      
+        like.innerHTML = nbrLikesImg
+        textLikes.innerHTML = totalLikes
+    }
+      
+}
+
+async function sortButtons(photo){
+    // ecouter les boutons
+    const listButtons = document.querySelector('.sort-list')
+    listButtons.addEventListener('change', ()=>{sortMedias(photo)})
+    listButtons.addEventListener('keyup', (e)=>{
+        if(e.key === 'Enter'){
+            sortMedias(photo)
+        }
+    })
+    
+}
+
+async function sortMedias(photo){  
+    const listButtons = document.querySelector('.sort-list')
+    const valueSelected = listButtons.value
+    const gallery = document.querySelector('.gallery');
+    main.removeChild(gallery) 
+    switch (valueSelected) {
+        case 'Popularité':
+            photo.sort(function (a,b){return a.likes-b.likes})
+            displayMedia(photo)
+        break
+        case 'Date':
+            photo.sort((a, b) => new Date(b.date) - new Date(a.date))
+            displayMedia(photo)
+        break
+        case 'Titre':
+            function compareStrings(a, b) {       
+                return (a < b) ? -1 : (a > b) ? 1 : 0;
+            }
+            photo.sort(function(a, b) {
+                return compareStrings(a.title, b.title);
+              })
+            displayMedia(photo)
+        break
+        default:
+        displayMedia(photo)
+    }
+    lightBox()
+    likes(photo)
 }
 
 async function lightBox(){
@@ -180,8 +163,10 @@ async function lightBox(){
     const modaleImg = document.createElement('div')
     modaleImg.classList.add('modal__img')
     modaleImg.setAttribute('id', 'lightbox-modal')
+    modaleImg.setAttribute('name', 'lightbox-modal')
+    
     // ajout de la croix pour fermer
-    const close = document.createElement('span')
+    const close = document.createElement('button')
     close.classList.add('close')
     close.innerHTML = '&times;'
     // boutons suivant et précédent 
@@ -214,19 +199,25 @@ async function lightBox(){
 
     let currentImage
 
-     
+
     // boucle pour afficher les images dans une modale
     linksImages.forEach((links, index) => {
         links.addEventListener('click', (e) => {
             e.preventDefault()
             displayCurrentImage(index)
+            manage()
+        })
+        links.addEventListener('keypress', (e) => {
+            if(e.key === "Enter")
+            e.preventDefault()
+            displayCurrentImage(index)
+            manage()
         })
     })
 
     // afficher les images suivantes et precédentes
     // ajouter un compteur pour voir l'image actuelle et +1 pour l'image suivante et -1 pour la précédente ?
-    next.addEventListener('click', (e)=> {
-        e.preventDefault()
+    function nextImage(){
         let i = gallery.indexOf(currentImage)
         i++
         if(i>=gallery.length){
@@ -235,10 +226,9 @@ async function lightBox(){
         }else{
             displayCurrentImage(i)
         }
-    })
+    }
 
-    prev.addEventListener('click', (e)=> {
-        e.preventDefault()
+    function prevImage(){
         let i = gallery.indexOf(currentImage)
         i--
         console.log(i)
@@ -248,7 +238,12 @@ async function lightBox(){
         }else{
             displayCurrentImage(i)
         }
-    })
+    }
+
+    // bouton pour fermer
+    function closeWindow(){
+        modaleImg.style.display = 'none'
+    }
 
     // bouton suivant et précédent 
 
@@ -267,10 +262,28 @@ async function lightBox(){
         return currentImage
     }
 
-    // bouton pour fermer
-    close.addEventListener('click', () => {
-        modaleImg.style.display = 'none'
-    })
+    function manage(){
+        next.addEventListener('click', ()=>{ nextImage() })
+        prev.addEventListener('click', ()=>{ prevImage() })
+        close.addEventListener('click', ()=>{ closeWindow() })
+
+        // Navigation au clavier 
+        document.addEventListener("keyup", (e) => {
+            switch(e.key){
+                case "ArrowRight":
+                    nextImage()
+                    break
+                case "ArrowLeft":
+                    prevImage()
+                    break
+                case "Escape":
+                    closeWindow()
+                    break
+            }
+            console.log(e.key)
+        })
+    }
+    
 }
 
 async function initPhotographer(){
@@ -279,11 +292,11 @@ async function initPhotographer(){
     const foundPhotographer = photographers.find(element => element.id == photographerId);
     // filtrer les image du photographe
     const photo = media.filter(m => m.photographerId === parseInt(photographerId));
-    setSortButton(photo)
-    headerPhotographer(foundPhotographer);
-    displayMedia(photo);
+    displayFactories(foundPhotographer, photo);
+    displayMedia(photo)
     containerLikePrice(foundPhotographer);
     lightBox();
     likes(photo);
+    sortButtons(photo)
 }
 initPhotographer();
