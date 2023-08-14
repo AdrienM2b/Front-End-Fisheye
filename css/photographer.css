@@ -8,9 +8,8 @@
     justify-content: center;
     left: 0;
     top: 0;
-    /* transform: translate(-50%, -50%); */
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 2;
 }
 
@@ -50,6 +49,8 @@
     position: absolute;
     top: 9%;
     right: 7%;
+    background-color: transparent;
+    border: none;
 }
 
 .button-container{
@@ -90,7 +91,7 @@
 
 .modal {
     position: fixed;
-    transform: translate(50%, 50%);
+    transform: translate(40%, 30%);
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
@@ -220,10 +221,16 @@ form input {
     font-size: 20px;
 }
 
-.like__container{
+.total-likes_container{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
+
+.total-likes_container .fa-solid{
+    margin: 10%;
+}
+
 
 .like-button{
     display: flex;
@@ -236,10 +243,13 @@ form input {
 
 .sort-list__container{
     display: flex;
-    margin: 0 100px;
+    margin: 2% 100px;
+    height: 5vh;
 }
 
 .sort-list{
     margin-left: 5%;
     list-style: none;
+    background-color: #901C1C;
+    color: white;
 }
