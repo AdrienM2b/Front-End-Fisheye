@@ -14,4 +14,4 @@ function closeModal() {
     contactModal.style.display = "none";
 }
 
-
+export { displayModal }
