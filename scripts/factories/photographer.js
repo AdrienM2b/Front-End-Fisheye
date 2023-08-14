@@ -10,22 +10,27 @@ function photographerFactory(data) {
         const photoProfil = document.createElement( 'img' );
         photoProfil.setAttribute("src", picture)
         photoProfil.setAttribute("alt", "photo de profil de l'artiste " + name);
+        photoProfil.setAttribute('aria-label', "photo de profil")
         photoProfil.classList.add("artist-img");
 
         const artistName = document.createElement( 'h2' );
         artistName.textContent = name;
         artistName.classList.add("artist-title");
+        artistName.setAttribute('aria-label', "nom de l'artiste");
 
         const location = document.createElement('p');
         location.textContent = city + ", " + country;
-        location.style.color = "#901C1C"
+        location.style.color = "#901C1C";
+        location.setAttribute('aria-label', "localisation de l'artiste");
 
         const artistTagLine = document.createElement('p');
         artistTagLine.textContent = tagline;
+        artistTagLine.setAttribute('aria-label', "citation de l'artiste");
 
         const artistPrice = document.createElement('p');
         artistPrice.textContent = price + " €/jour";
         artistPrice.style.color = "#757575"
+        artistPrice.setAttribute('aria-label', "tarif de l'artiste");
 
         const photographerLink = document.createElement('a');
         const baseUrl = new URL("http://127.0.0.1:5501/photographer.html");
@@ -81,3 +86,5 @@ function photographerFactory(data) {
     }
     return { name, picture, id, getUserCardDOM, userImageProfil, userContent}
 }
+
+export { photographerFactory }
