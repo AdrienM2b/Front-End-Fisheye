@@ -1,3 +1,13 @@
+import { photographerFactory } from "../factories/photographer.js"
+import { mediaFactory } from "../factories/media-factory.js";
+
+// UTILS
+
+// trier les titres par ordre alphabetique 
+function compareStrings(a, b) {       
+    return (a < b) ? -1 : (a > b) ? 1 : 0;
+}
+
 //Mettre le code JavaScript lié à la page photographer.html
 let params = new URL(document.location).searchParams;
 let photographerId = params.get("id");
@@ -88,7 +98,6 @@ async function likes(photo){
         });
         
         bouton.addEventListener('keypress', function(event) {
-            console.log(key)
             if (event.key === 'Enter') {
             changeLikes(index);
             }
@@ -141,9 +150,6 @@ async function sortMedias(photo){
             displayMedia(photo)
         break
         case 'Titre':
-            function compareStrings(a, b) {       
-                return (a < b) ? -1 : (a > b) ? 1 : 0;
-            }
             photo.sort(function(a, b) {
                 return compareStrings(a.title, b.title);
               })

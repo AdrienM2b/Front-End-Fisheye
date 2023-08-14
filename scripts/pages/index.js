@@ -1,10 +1,11 @@
-    async function getPhotographers() {
+import { photographerFactory } from '../factories/photographer.js'
+
+async function getPhotographers() {
         // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet, 
         // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
         let reponse = await fetch('data/photographers.json');
         let photographers = (await reponse).json();
         // et bien retourner le tableau photographers seulement une fois récupéré
-        console.log(photographers);
         return photographers;
     }
 
@@ -23,7 +24,6 @@
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers();
         displayData(photographers);
-        console.log(photographers);
     }
     
     init();
