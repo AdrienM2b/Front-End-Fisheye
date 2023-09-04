@@ -83,8 +83,8 @@ form input {
     left: 0;
     top: 0;
     /* transform: translate(-50%, -50%); */
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 2;
 }
 
@@ -103,10 +103,10 @@ form input {
 }
 
 .close{
-    font-size: 8vw;
+    font-size: 6vw;
     color: #901C1C;
     position: absolute;
-    top: 9%;
+    top: 8%;
     right: 7%;
     background-color: transparent;
     border: none;
@@ -117,7 +117,7 @@ form input {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 5%;
 }
 
@@ -182,19 +182,16 @@ form input {
 /* agencement des images */
 .gallery{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-    row-gap: 10%;
-    column-gap: 7%;
+    grid-template-columns: repeat(3, 28%);
+    grid-template-rows: repeat(4, 20%);
+    grid-column-gap: 8%;
     margin: 0 100px;
-    align-items: center;
-    justify-items: center;
 }
 
 /* container de l'image/video */
 .media-container{
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height: 80%;
 }
 
 .media video{
@@ -252,15 +249,78 @@ form input {
 
 /* bouton de tri */
 
-.sort-list__container{
+/* Styles pour le bouton */
+.sort-by{
     display: flex;
-    margin: 2% 100px;
-    height: 5vh;
+    height: 100px;
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+
+.sort-by__title{
+    margin-right: 20px;
+}
+.sort-by__container__button{
+    width: 170px;
+    height: 69px;
 }
 
-.sort-list{
-    margin-left: 5%;
-    list-style: none;
+
+.sort-by__container__button-dropdown {
+    width: 100%;
+    height: 100%;
     background-color: #901C1C;
     color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
 }
+
+/* Styles pour le menu déroulant */
+.sort-by__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    display: none;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 1;
+}
+
+/* .sort-by__option.hidden{
+    display: none;
+} */
+
+.sort-by__list {
+    display: block;
+    background-color: #901C1C;
+    width: 170px;
+    height: auto;
+}
+
+/* .sort-by__list.show{
+    display: block;
+}
+.sort-by__list.hide{
+    display: none;
+} */
+
+.sort-by__option.selected{
+    display: block;
+}
+.sort-by__option.hidden{
+    display: none;
+}
+
+.sort-by__list li {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.sort-by__list li:hover {
+    background-color: #ddd;
+}
+  
