@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
+<html lang="fra">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -23,20 +22,20 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" class='close_button' onclick="closeModal()" alt="bouton permettant de fermer la modale"/>
         </header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input type="text" name="prenom"/>
-            <label>Nom</label>
-						<input type="text" name="nom"/>
-            <label>Email</label>
-						<input type="email" name="email"/>
-            <label>Votre message</label>
-						<input type="text" name="message"/>
+						<label for="prenom">Prénom</label>
+						<input type="text" name="prenom" id="prenom" value="" />
+            <label for="nom">Nom</label>
+						<input type="text" name="nom" id="nom" value="" />
+            <label for="email">Email</label>
+						<input type="email" name="email" id="email" value="" />
+            <label for="message">Votre message</label>
+						<input type="text" name="message" id="message" value="" />
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" id="contact-modal__button">Envoyer</button>
 				</form>
 			</div>
 		</div>
@@ -44,5 +43,9 @@
     <script type="module" src="scripts/utils/contactForm.js"></script>
     <script type="module" src="scripts/factories/photographer.js"></script>
     <script type="module" src="scripts/factories/media-factory.js"></script>
+    <script type="module" src="scripts/utils/sortByButton.js"></script>
+    <script type="module" src="scripts/utils/displayMedia.js"></script>
+    <script type="module" src="scripts/utils/lightBox.js"></script>
+    <script type="module" src="scripts/utils/likeButtons.js"></script>
   </body>
 </html>
