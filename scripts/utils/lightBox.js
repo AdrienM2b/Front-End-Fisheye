@@ -1,46 +1,46 @@
-// creer le html de la modale
+// creer le html de la modale lightbox
 function createLightbox() {
-    const modal = document.createElement('div');
-    modal.classList.add('modal__img');
-    modal.setAttribute('id', 'lightbox-modal');
+    const modal = document.createElement('div')
+    modal.classList.add('modal__img')
+    modal.setAttribute('id', 'lightbox-modal')
 
-    const modalContent = document.createElement('div');
-    modalContent.classList.add('modal__content');
+    const modalContent = document.createElement('div')
+    modalContent.classList.add('modal__content')
 
-    const close = document.createElement('button');
-    close.classList.add('close');
-    close.innerHTML = '&times;';
+    const close = document.createElement('button')
+    close.classList.add('close')
+    close.innerHTML = '&times;'
 
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.classList.add('button-container');
+    const buttonsContainer = document.createElement('div')
+    buttonsContainer.classList.add('button-container')
 
-    const prevButton = document.createElement('button');
-    prevButton.classList.add('prev');
-    prevButton.innerHTML = '&lt;';
+    const prevButton = document.createElement('button')
+    prevButton.classList.add('prev')
+    prevButton.innerHTML = '&lt;'
 
-    const nextButton = document.createElement('button');
-    nextButton.classList.add('next');
-    nextButton.innerHTML = '&gt;';
+    const nextButton = document.createElement('button')
+    nextButton.classList.add('next')
+    nextButton.innerHTML = '&gt;'
 
-    buttonsContainer.appendChild(prevButton);
-    buttonsContainer.appendChild(nextButton);
+    buttonsContainer.appendChild(prevButton)
+    buttonsContainer.appendChild(nextButton)
 
-    modal.appendChild(modalContent);
-    modal.appendChild(close);
-    modal.appendChild(buttonsContainer);
+    modal.appendChild(modalContent)
+    modal.appendChild(close)
+    modal.appendChild(buttonsContainer)
 
-    return modal;
+    return modal
 }
 
 // Gestion de l'affichage des images et des boutons
 function addImageToLightbox() {
-    const mediaElements = document.querySelectorAll('.media');
-    const lightboxModal = createLightbox();
-    let currentIndex = 0;
+    const mediaElements = document.querySelectorAll('.media')
+    const lightboxModal = createLightbox()
+    let currentIndex = 0
 
     mediaElements.forEach((mediaElement, index) => {
         mediaElement.addEventListener('click', (e) => {
-            e.preventDefault();
+            e.preventDefault()
 
             // Vérifier si c'est une vidéo ou une image
             const isVideo = mediaElement.childNodes[0].nodeName
@@ -55,9 +55,10 @@ function addImageToLightbox() {
 
             // Effacer le contenu précédent de la lightbox et ajouter le média
             const modalContent = lightboxModal.querySelector('.modal__content')
-            modalContent.innerHTML = '' // Effacer le contenu précédent
+            modalContent.innerHTML = '' 
             modalContent.appendChild(mediaToShow)
             
+            // Image suivante
             function nextImage(){
                 currentIndex = (currentIndex + 1) % mediaElements.length
                 const newMediaElement = mediaElements[currentIndex]
@@ -74,7 +75,7 @@ function addImageToLightbox() {
                 modalContent.innerHTML = '' // Effacer le contenu précédent
                 modalContent.appendChild(newMediaToShow)
             }
-
+            // Image précédente 
             function prevImage(){
                 currentIndex = (currentIndex - 1 + mediaElements.length) % mediaElements.length
                 const newMediaElement = mediaElements[currentIndex]
@@ -96,12 +97,14 @@ function addImageToLightbox() {
             function closeModal(){
                 lightboxModal.style.display = 'none'
             }
+
+            // Bouton fermer
             const close = lightboxModal.querySelector('.close')
             close.addEventListener('click', () => {
                 closeModal()
-            });
+            })
 
-            // Gestionnaire pour le média suivant au clic 
+            // Gestionnaire pour le média suivant au clic ou précédent
             const nextButton = lightboxModal.querySelector('.next')
             nextButton.addEventListener('click', () => {
                 nextImage()
@@ -111,7 +114,7 @@ function addImageToLightbox() {
                 prevImage()
             })
 
-            // Gestionnaire pour le média suivant avec les boutons
+            // Gestionnaire pour le média suivant avec le clavier
             window.addEventListener('keydown', function(event) {
                 switch (event.key){
                     case 'ArrowRight':
@@ -132,8 +135,8 @@ function addImageToLightbox() {
             // Ajouter la lightbox au document
             document.body.appendChild(lightboxModal)
             currentIndex = index // Mettre à jour l'index courant
-        });
-    });
+        })
+    })
 }
 
 

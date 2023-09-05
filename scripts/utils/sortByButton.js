@@ -1,10 +1,8 @@
-import { displayMedia } from "../utils/displayMedia.js";
-// import { addImageToLightbox } from "./lightBox.js";
-import { likes } from "./likeButtons.js";
+import { displayMedia } from "../utils/displayMedia.js"
 
 // trier les titres par ordre alphabetique 
 function compareStrings(a, b) {       
-    return (a < b) ? -1 : (a > b) ? 1 : 0;
+    return (a < b) ? -1 : (a > b) ? 1 : 0
 }
 const main = document.querySelector('main')
 
@@ -22,12 +20,6 @@ function buttonSort(){
     const buttonContainer = document.createElement('div')
     buttonContainer.classList.add('sort-by__container__button')
 
-    // // Bouton pour le dropdown
-    // const dropdownButton = document.createElement('button')
-    // dropdownButton.classList.add('sort-by__container__button-dropdown')
-    // dropdownButton.id = 'sortButton'
-    // dropdownButton.textContent = 'Selectionner'
-
     // Container des options
     const listOptions = document.createElement('ul')
     listOptions.classList.add('sort-by__list')
@@ -35,7 +27,7 @@ function buttonSort(){
     listOptions.id = 'selectMenu'
 
     // Options
-    const options = ["Date", "Popularité", "Titre"]; // Liste des options
+    const options = ["Date", "Popularité", "Titre"]
 
     options.forEach(optionText => {
         const option = document.createElement('li')
@@ -48,12 +40,10 @@ function buttonSort(){
     // Liaison des elements entre eux
     container.appendChild(title)
     container.appendChild(buttonContainer)
-    // buttonContainer.appendChild(dropdownButton)
     buttonContainer.appendChild(listOptions)
 
     return container
 }
-
 
 function sortByButtons(photo){
     main.appendChild(buttonSort())
@@ -61,8 +51,7 @@ function sortByButtons(photo){
     // Récupérez les éléments DOM
     const selectMenu = document.getElementById('selectMenu')
     const selectLien = document.querySelectorAll('.sort-by__option')
-    console.log(selectMenu.classList.contains('hide'))
-
+    
     // cacher les deux derniers elemetns de la liste
     for (let i = selectLien.length - 1; i >= selectLien.length - 2; i--) {
         selectLien[i].classList.add('hidden')
@@ -70,7 +59,7 @@ function sortByButtons(photo){
 
     // Sélectionnez le menu déroulant et ajoutez un gestionnaire d'événements pour le clic
     selectMenu.addEventListener('click', function() {
-        // (masquer le menu)Si le menu est déjà affiché, cliquer dessus le masque
+        // (masquer le menu)Si le menu est déjà affiché
         if (selectMenu.classList.contains('show')) {
             selectMenu.classList.toggle('hide')
             selectMenu.classList.remove('show')
@@ -80,7 +69,7 @@ function sortByButtons(photo){
             selectMenu.classList.toggle('show')
             selectMenu.classList.remove('hide')
             showDropdown()
-            // Sinon, afficher le menu et enlever la classe hidden des éléments cachés
+            // afficher le menu et enlever la classe hidden des éléments cachés
             selectLien.forEach(li => {
                 li.classList.remove('hidden')
                 li.classList.remove('selected')
@@ -91,8 +80,9 @@ function sortByButtons(photo){
                         if (li.getAttribute('value') === selectedValue) {
                             li.classList.add('selected')
                             // mettre à zero la gallerie
-                            const gallery = document.querySelector('.gallery');
+                            const gallery = document.querySelector('.gallery')
                             main.removeChild(gallery)
+                            // choisir le mode de tri
                             switch (selectedValue) {
                                 case 'popularité':
                                     sortByPopularity(photo)
@@ -127,49 +117,6 @@ function sortByButtons(photo){
         })
     }
 }
-
-
-
-
-    // // Menu déroulant
-    // selectMenu.addEventListener('click', function(event) {
-    //     // Elément cliqué est un <li> avec l'attribut data-value ?
-    //     if (event.target.getAttribute('value')) {
-    //         // Obtenez la valeur de l'attribut data-value
-    //         const selectedValue = event.target.getAttribute('value')
-            
-    //         // Mis à jour du texte du bouton avec le texte de l'élément cliqué
-    //         selectMenu.textContent = event.target.textContent
-            
-    //         selectLien.forEach(li => {
-    //             if (li.getAttribute('value') === selectedValue) {
-    //                 li.classList.add('selected');
-    //             } else {
-    //                 li.classList.remove('selected');
-    //             }
-    //         })
-    //         // // Retirer le bouton cliqué du menu
-    //         // selectMenu.removeChild(event.target)
-
-    //         // // Ajouter le bouton cliqué au début du menu
-    //         // selectMenu.prepend(event.target)
-
-    //         
-
-    //         // Masquez le menu
-    //         selectMenu.classList.remove('show')
-    //     }
-    // })
-    // // Fermer le menu déroulant lorsque l'utilisateur clique en dehors du menu
-    // window.addEventListener('click', function(event) {
-        //     if (!event.target.matches('.sort-by__container__button-dropdown')) {
-            //         selectMenu.classList.remove('show')
-            //     }
-            // })
-            
-
-        
-        
         
 function sortByPopularity(photo){
         photo.sort(function (a,b){return a.likes-b.likes})
