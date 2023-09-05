@@ -1,86 +1,84 @@
 function photographerFactory(data) {
-    const { name, portrait, city, country, price, tagline, id } = data;
+    const { name, portrait, city, country, price, tagline, id } = data
 
 
-    const picture = `assets/photographers/Photographers_ID_Photos/${portrait}`;
+    const picture = `assets/photographers/Photographers_ID_Photos/${portrait}`
 
     function getUserCardDOM() {
-        const article = document.createElement( 'article' );
+        const article = document.createElement( 'article' )
 
-        const photoProfil = document.createElement( 'img' );
+        const photoProfil = document.createElement( 'img' )
         photoProfil.setAttribute("src", picture)
-        photoProfil.setAttribute("alt", "photo de profil de l'artiste " + name);
+        photoProfil.setAttribute("alt", "photo de profil de l'artiste " + name)
         photoProfil.setAttribute('aria-label', "photo de profil")
-        photoProfil.classList.add("artist-img");
+        photoProfil.classList.add("artist-img")
 
-        const artistName = document.createElement( 'h2' );
-        artistName.textContent = name;
-        artistName.classList.add("artist-title");
-        artistName.setAttribute('aria-label', "nom de l'artiste");
+        const artistName = document.createElement( 'h2' )
+        artistName.textContent = name
+        artistName.classList.add("artist-title")
+        artistName.setAttribute('aria-label', "nom de l'artiste")
 
-        const location = document.createElement('p');
-        location.textContent = city + ", " + country;
-        location.style.color = "#901C1C";
-        location.setAttribute('aria-label', "localisation de l'artiste");
+        const location = document.createElement('p')
+        location.textContent = city + ", " + country
+        location.style.color = "#901C1C"
+        location.setAttribute('aria-label', "localisation de l'artiste")
 
-        const artistTagLine = document.createElement('p');
-        artistTagLine.textContent = tagline;
-        artistTagLine.setAttribute('aria-label', "citation de l'artiste");
+        const artistTagLine = document.createElement('p')
+        artistTagLine.textContent = tagline
+        artistTagLine.setAttribute('aria-label', "citation de l'artiste")
 
-        const artistPrice = document.createElement('p');
-        artistPrice.textContent = price + " €/jour";
+        const artistPrice = document.createElement('p')
+        artistPrice.textContent = price + " €/jour"
         artistPrice.style.color = "#757575"
-        artistPrice.setAttribute('aria-label', "tarif de l'artiste");
+        artistPrice.setAttribute('aria-label', "tarif de l'artiste")
 
-        const photographerLink = document.createElement('a');
-        const baseUrl = new URL("http://127.0.0.1:5501/photographer.html");
-        const photographerId = data.id;
-        baseUrl.searchParams.set('id', photographerId); 
-        photographerLink.setAttribute("href", baseUrl);
-        console.log(photographerLink);
-
-        photographerLink.appendChild(photoProfil);
-        photographerLink.appendChild(artistName);
-        article.appendChild(photographerLink);
-        article.appendChild(location);
-        article.appendChild(artistTagLine);
-        article.appendChild(artistPrice);
+        const photographerLink = document.createElement('a')
+        const baseUrl = new URL("http://127.0.0.1:5501/photographer.html")
+        const photographerId = data.id
+        baseUrl.searchParams.set('id', photographerId)
+        photographerLink.setAttribute("href", baseUrl)
+        photographerLink.appendChild(photoProfil)
+        photographerLink.appendChild(artistName)
+        article.appendChild(photographerLink)
+        article.appendChild(location)
+        article.appendChild(artistTagLine)
+        article.appendChild(artistPrice)
         
-        return article;
+        return article
     }
 
     function userContent(){
-        const artistContent = document.createElement( 'div' );
-        artistContent.classList.add('content');
+        const artistContent = document.createElement( 'div' )
+        artistContent.classList.add('content')
 
-        const artistName = document.createElement( 'h2' );
-        artistName.textContent = name;
-        artistName.classList.add("artist-title");
+        const artistName = document.createElement( 'h2' )
+        artistName.textContent = name
+        artistName.classList.add("artist-title")
 
-        const location = document.createElement('p');
-        location.textContent = city + ", " + country;
+        const location = document.createElement('p')
+        location.textContent = city + ", " + country
         location.style.color = "#901C1C"
 
-        const artistTagLine = document.createElement('p');
-        artistTagLine.textContent = tagline;
+        const artistTagLine = document.createElement('p')
+        artistTagLine.textContent = tagline
 
-        artistContent.appendChild(artistName);
-        artistContent.appendChild(location);
-        artistContent.appendChild(artistTagLine);
+        artistContent.appendChild(artistName)
+        artistContent.appendChild(location)
+        artistContent.appendChild(artistTagLine)
         
         
-        return artistContent;
+        return artistContent
     }
     function userImageProfil(){
-        const artistHeader = document.createElement('div');
-        artistHeader.classList.add('img-artist');
+        const artistHeader = document.createElement('div')
+        artistHeader.classList.add('img-artist')
 
-        const photoProfil = document.createElement( 'img' );
+        const photoProfil = document.createElement( 'img' )
         photoProfil.setAttribute("src", picture)
-        photoProfil.setAttribute("alt", "photo de profil de l'artiste " + name);
-        photoProfil.classList.add("artist-img");
+        photoProfil.setAttribute("alt", "photo de profil de l'artiste " + name)
+        photoProfil.classList.add("artist-img")
 
-        artistHeader.appendChild(photoProfil);
+        artistHeader.appendChild(photoProfil)
 
         return artistHeader
     }
