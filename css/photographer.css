@@ -290,23 +290,12 @@ form input {
     z-index: 1;
 }
 
-/* .sort-by__option.hidden{
-    display: none;
-} */
-
 .sort-by__list {
     display: block;
     background-color: #901C1C;
     width: 170px;
     height: auto;
 }
-
-/* .sort-by__list.show{
-    display: block;
-}
-.sort-by__list.hide{
-    display: none;
-} */
 
 .sort-by__option.selected{
     display: block;
