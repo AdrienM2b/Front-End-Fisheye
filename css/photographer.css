@@ -192,19 +192,23 @@ form input {
 .media-container{
     width: 100%;
     height: 80%;
+    border-radius: 5px;
 }
 
 .media video{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 5px;
 }
 .media img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 5px;
 }
 .img-content{
+    color: #901C1C;
     display: flex;
     justify-content: space-between;
 }
@@ -240,6 +244,7 @@ form input {
  /* bouton de like */
 .like-button{
     display: flex;
+    color: #901C1C;
     justify-content: space-around;
     align-items: center;
     border: none;
@@ -249,67 +254,111 @@ form input {
 
 /* bouton de tri */
 
-/* Styles pour le bouton */
-.sort-by{
+.sort_by-container{
     display: flex;
-    height: 100px;
-    margin-left: 100px;
-    margin-top: 20px;
-  }
+    flex-direction: row;
+    margin: 0 100px;
+}
 
-.sort-by__title{
+.sort_by-container > p{
     margin-right: 20px;
 }
-.sort-by__container__button{
-    width: 170px;
-    height: 69px;
-}
-
-
-.sort-by__container__button-dropdown {
-    width: 100%;
-    height: 100%;
-    background-color: #901C1C;
+.bouton_input {
+    position: relative;
+    height: 50px;
+    width: 180px;
+    margin-bottom: 50px;
     color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
 }
 
-/* Styles pour le menu déroulant */
-.sort-by__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    display: none;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    border-radius: 5px;
-    z-index: 1;
-}
-
-.sort-by__list {
-    display: block;
-    background-color: #901C1C;
-    width: 170px;
+.container_arrow_input{
+    width: 100%;
     height: auto;
 }
 
-.sort-by__option.selected{
-    display: block;
-}
-.sort-by__option.hidden{
-    display: none;
+.arrow{
+    position: absolute;
+    right: 6%;
+    top: 30%;
+    color: white;
 }
 
-.sort-by__list li {
-    padding: 10px 20px;
+.down{
+    transform: rotate(-90deg);
+}
+.up{
+    transform: rotate(90deg);
+}
+  
+.input__active {
+    border-color: var(--colorAccent);
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.input__placeholder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.input:hover {
     cursor: pointer;
 }
 
-.sort-by__list li:hover {
-    background-color: #ddd;
+.placeholder {
+    color: white;
+    padding: 16px;
+    background-color: #901C1C;
+    width: 148px;
+    border-radius: 5px;
+}
+
+.input__selected {
+    color: var(--colorPrimaryDark);
+}
+
+/* Dropdown styling */
+.structure {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+    width: 180px;
+    background-color: #901C1C;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.structure > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    padding: 16px;
+    cursor: pointer;
 }
   
+.structure > div:nth-child(1)::after{
+    content: "";
+    position: absolute;
+    bottom: -7%;
+    height: 2px;
+    width: 80%;
+    background-color: white;
+}
+.structure > div:nth-child(2)::after{
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 80%;
+    top: 210%;
+    background-color: white;
+}
+  
+.hide {
+display: none;
+}
