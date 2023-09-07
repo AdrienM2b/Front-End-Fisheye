@@ -1,12 +1,7 @@
 function likes(photo){
-    const textLikes =  document.querySelectorAll('.total-likes')
     // calcul du nombre total de likes
-    var totalLikes = 0
-
-    photo.forEach((like) => {
-        totalLikes += like.likes
-    })
-    textLikes.innerText = totalLikes
+    const textLikes =  document.querySelector('.total-likes')
+    var totalLikes = textLikes.textContent
   
     // incrementation du like
     const boutonLike = document.querySelectorAll('.like-button')
@@ -14,9 +9,9 @@ function likes(photo){
         bouton.addEventListener('click', () => {
             changeLikes(index)
         })
-        
         bouton.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
+            event.preventDefault()
+            if (event.key === "Enter") {
             changeLikes(index)
             }
         })
@@ -38,7 +33,6 @@ function likes(photo){
         like.innerHTML = nbrLikesImg
         textLikes.innerHTML = totalLikes
     }
-      
 }
 
 export { likes }
