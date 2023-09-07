@@ -23,8 +23,8 @@ async function initPhotographer(){
 
     // initialiser les fonctions 
     sortByButtons(photo)
+    containerLikePrice(foundPhotographer, photo)
     displayFactories(foundPhotographer, photo)
-    containerLikePrice(foundPhotographer)
 }
 initPhotographer()
 
@@ -45,7 +45,7 @@ async function displayFactories(foundPhotographer, photo){
     displayMedia(photo)
 }
 
-async function containerLikePrice(foundPhotographer){
+async function containerLikePrice(foundPhotographer, photo){
     //affichage du Prix et nbr de like du photographe
     const boxPrice = document.createElement('div')
     boxPrice.classList.add('boxPrice-photographer')
@@ -59,7 +59,6 @@ async function containerLikePrice(foundPhotographer){
     
     const totalLikes = document.createElement('p')
     totalLikes.classList.add('total-likes')
-    totalLikes.textContent = '0'
 
     // ajout de l'icone
     const icone = document.createElement('i')
@@ -71,5 +70,13 @@ async function containerLikePrice(foundPhotographer){
     boxPrice.appendChild(likeContainer)
     boxPrice.appendChild(photographPrice)
     main.appendChild(boxPrice)
+
+        // calcul du nombre total de likes
+        var totalPhotoLikes = 0
+
+        photo.forEach((like) => {
+            totalPhotoLikes += like.likes
+        })
+        totalLikes.innerText = totalPhotoLikes
 }
 
