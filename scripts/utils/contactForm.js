@@ -7,6 +7,7 @@ contactButton.setAttribute('aria-label', 'ouvrir le formulaire de contact')
 
 function displayModal() {
 	contactModal.style.display = "block"
+    document.querySelector('#prenom').focus()
 }
 // Fonction d'affichage des input de la modale
 function renvoyerLesInfos(){
