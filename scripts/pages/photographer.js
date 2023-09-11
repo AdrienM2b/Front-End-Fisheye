@@ -71,12 +71,12 @@ async function containerLikePrice(foundPhotographer, photo){
     boxPrice.appendChild(photographPrice)
     main.appendChild(boxPrice)
 
-        // calcul du nombre total de likes
-        var totalPhotoLikes = 0
+    // calcul du nombre total de likes
+    var totalPhotoLikes = 0
 
-        photo.forEach((like) => {
-            totalPhotoLikes += like.likes
-        })
-        totalLikes.innerText = totalPhotoLikes
+    photo.forEach((like) => {
+        totalPhotoLikes += like.likes
+    })
+    totalLikes.innerText = totalPhotoLikes
 }
 
