@@ -2,6 +2,8 @@
 const contactModal = document.getElementById("contact_modal")
 
 const contactButton = document.querySelector('#contact-modal__button')
+contactButton.setAttribute('aria-role', 'button')
+contactButton.setAttribute('aria-label', 'ouvrir le formulaire de contact')
 
 function displayModal() {
 	contactModal.style.display = "block"

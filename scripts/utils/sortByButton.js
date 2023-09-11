@@ -20,6 +20,7 @@ function sortByTitre(photo){
 
 function sortByButtons(photo){
     const elements = ['Date', 'Popularité', 'Titre']
+
     // element regroupant les 2 container le parapgraphe et le bouton
     const container = document.createElement('div')
     container.classList = "sort_by-container"
@@ -29,9 +30,18 @@ function sortByButtons(photo){
     parapgraph.textContent = 'Trier par'
 
     // Le conteneur du bouton + de la liste
-    const inputSelection = document.createElement('div')
+    const inputSelection = document.createElement('button')
     inputSelection.classList = 'bouton_input'
+    inputSelection.setAttribute('aria-role', 'button')
+    inputSelection.setAttribute('aria-label', 'bouton affichant la liste déroulante des tris')
     inputSelection.addEventListener("click", toggleDropdown)
+    inputSelection.addEventListener("keypress", function(event){
+        event.stopPropagation()
+        if(event.key === 'Enter'){
+            toggleDropdown
+        }
+        
+    })
 
     // conteneur du placeholder + de la fleche
     const containerArrowInput = document.createElement('div')
@@ -60,12 +70,22 @@ function sortByButtons(photo){
 
     // Creation de chaque choix
     elements.forEach(uniqueElements => {
-        const option = document.createElement("div")
+        const option = document.createElement("button")
+        option.setAttribute('aria-role', 'button')
+        option.setAttribute('aria-label', "trier par :" + uniqueElements)
         // On ajoute un ecouteur pour chaque choix de tri
         option.addEventListener("click", (event) => selectOption(event))
+        option.addEventListener("keypress", function(event) {
+            event.preventDefault()
+            if (event.key === "Enter") {
+                selectOption(event)
+            }
+        })
         option.textContent = uniqueElements
         structure.appendChild(option)
     })
+
+
 
     inputSelection.appendChild(structure)
 
