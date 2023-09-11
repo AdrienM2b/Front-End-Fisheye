@@ -269,6 +269,9 @@ form input {
     width: 180px;
     margin-bottom: 50px;
     color: white;
+    text-align: left;
+    border: none;
+    background-color: transparent;
 }
 
 .container_arrow_input{
@@ -333,16 +336,19 @@ form input {
     z-index: 2;
 }
 
-.structure > div {
+.structure > button {
     display: flex;
     flex-direction: row;
     align-items: center;
     color: white;
+    background-color: #901C1C;
+    border: none;
+    border-radius: 5px;
     padding: 16px;
     cursor: pointer;
 }
   
-.structure > div:nth-child(1)::after{
+.structure > button:nth-child(1)::after{
     content: "";
     position: absolute;
     bottom: -7%;
@@ -350,7 +356,7 @@ form input {
     width: 80%;
     background-color: white;
 }
-.structure > div:nth-child(2)::after{
+.structure > button:nth-child(2)::after{
     content: "";
     position: absolute;
     height: 2px;
