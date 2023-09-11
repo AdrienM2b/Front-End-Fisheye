@@ -61,7 +61,7 @@ async function containerLikePrice(foundPhotographer, photo){
     totalLikes.classList.add('total-likes')
 
     // ajout de l'icone
-    const icone = document.createElement('i')
+    const icone = document.createElement('em')
     icone.classList.add('fa-solid', 'fa-heart')
 
     // ajouter tout ensemble

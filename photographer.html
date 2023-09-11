@@ -1,4 +1,4 @@
-<html lang="fra">
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <meta charset="utf-8">
@@ -15,27 +15,27 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" aria-role="button">Contactez-moi</button>
       </div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" class='close_button' onclick="closeModal()" alt="bouton permettant de fermer la modale"/>
+          <img src="assets/icons/close.svg" class='close_button' onclick="closeModal()" aria-role="button" alt="bouton permettant de fermer la modale"/>
         </header>
 				<form>
 					<div>
 						<label for="prenom">Prénom</label>
-						<input type="text" name="prenom" id="prenom" value="" />
+						<input type="text" name="prenom" id="prenom" value="" aria-label="champ prenom"/>
             <label for="nom">Nom</label>
-						<input type="text" name="nom" id="nom" value="" />
+						<input type="text" name="nom" id="nom" value="" aria-label="champ nom"/>
             <label for="email">Email</label>
-						<input type="email" name="email" id="email" value="" />
+						<input type="email" name="email" id="email" value="" aria-label="champ email"/>
             <label for="message">Votre message</label>
-						<input type="text" name="message" id="message" value="" />
+						<input type="text" name="message" id="message" value="" aria-label="champ message"/>
 					</div>
-          <button class="contact_button" id="contact-modal__button">Envoyer</button>
+          <button class="contact_button" id="contact-modal__button" aria-role="button">Envoyer</button>
 				</form>
 			</div>
 		</div>
